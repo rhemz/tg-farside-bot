@@ -14,7 +14,9 @@ func TestHealthEndpoint(t *testing.T) {
 	rec := httptest.NewRecorder()
 
 	c := e.NewContext(req, rec)
-	if assert.NoError(t, HealthEndpoint(c)) {
+
+	h := &Handler{}
+	if assert.NoError(t, h.HealthEndpoint(c)) {
 		assert.Equal(t, "{\n  \"message\": \"ok\"\n}\n", rec.Body.String())
 	}
 }

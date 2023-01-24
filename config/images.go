@@ -1,13 +1,28 @@
 package config
 
+import (
+	"fmt"
+	"math/rand"
+)
+
 type (
 	ComicYear struct {
-		Year           int
-		SequenceStart  int
-		SequenceEnd    int
-		SequencePrefix string
+		Year              int
+		SequenceStart     int
+		SequenceEnd       int
+		SequencePrefix    string
+		SequencePrefixEnd int
 	}
 )
+
+func (c ComicYear) RandomImageFilename() string {
+	r := rand.Intn(c.SequenceEnd-c.SequenceStart) + c.SequenceStart
+	if c.SequencePrefixEnd > 0 && r > c.SequencePrefixEnd {
+		return fmt.Sprintf("%d_%d.jpg", c.Year, r)
+	}
+
+	return fmt.Sprintf("%d_%s%d.jpg", c.Year, c.SequencePrefix, r)
+}
 
 var (
 	AllComics = []*ComicYear{
@@ -43,15 +58,18 @@ var (
 			SequenceEnd:   94,
 		},
 		&ComicYear{
-			Year:           1986,
-			SequenceStart:  5,
-			SequenceEnd:    107,
-			SequencePrefix: "0",
+			Year:              1986,
+			SequenceStart:     5,
+			SequenceEnd:       107,
+			SequencePrefix:    "0", // everything pre-100 has 0 prefix, 100+ no prefix
+			SequencePrefixEnd: 99,
 		},
 		&ComicYear{
-			Year:          1987,
-			SequenceStart: 10,
-			SequenceEnd:   123,
+			Year:              1987,
+			SequenceStart:     10,
+			SequenceEnd:       123,
+			SequencePrefix:    "0", // everything pre-100 has 0 prefix, 100+ no prefix
+			SequencePrefixEnd: 99,
 		},
 		&ComicYear{
 			Year:          1988,

@@ -5,6 +5,6 @@ import (
 	"net/http"
 )
 
-func (h *Handler) HealthEndpoint(c echo.Context) error {
+func (h *Handler) TelegramEventEndpoint(c echo.Context) error {
 	return c.JSONPretty(http.StatusOK, Response{Message: "ok"}, JsonIndent)
 }
