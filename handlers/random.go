@@ -39,7 +39,7 @@ func (h *Handler) RandomComicEndpoint(c echo.Context) error {
 	}
 	photoMsg := tgbotapi.NewPhoto(chatId, photoData)
 	photoMsg.ParseMode = "HTML"
-	photoMsg.Caption = "test comic"
+	//photoMsg.Caption = "test comic"
 	resp, err := h.Api.Send(photoMsg)
 	if err != nil {
 		return err
