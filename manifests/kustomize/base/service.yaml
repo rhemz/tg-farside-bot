@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: farside-bot
+  labels:
+    app: farside-bot
+spec:
+  ports:
+    - port: 80
+      name: web
+      targetPort: http
+  type: ClusterIP
+  selector:
+    app: farside-bot

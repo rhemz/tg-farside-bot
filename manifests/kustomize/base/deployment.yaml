@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farside-bot
+spec:
+  selector:
+    matchLabels:
+      app: farside-bot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: farside-bot
+    spec:
+      containers:
+        - image: PATCH_THIS
+          imagePullPolicy: Always
+          name: farside-bot
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: farside-bot
+
+      imagePullSecrets:
+        - name: PATCH_THIS
