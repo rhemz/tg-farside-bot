@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: farside-daily-comic
+spec:
+  schedule: "PATCH_THIS"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          containers:
+            - name: farside-daily-comic
+              image: curlimages/curl:7.87.0
+              args:
+              - /bin/sh
+              - -ec
+              - "PATCH_THIS curl -X POST \"http://farside-bot/v1/random-comic/CHAT_ID\""
+          restartPolicy: OnFailure

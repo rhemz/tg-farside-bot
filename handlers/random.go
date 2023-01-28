@@ -49,7 +49,7 @@ func (h *Handler) RandomComicEndpoint(c echo.Context) error {
 		Message: "ok",
 		Data: struct {
 			ChatId   int64 `json:"chat_id"`
-			PostedAt int   `json:"posted_at""`
+			PostedAt int   `json:"posted_at"`
 		}{
 			ChatId:   resp.Chat.ID,
 			PostedAt: resp.Date,
